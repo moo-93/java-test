@@ -7,7 +7,7 @@ public class App {
         Scanner keyIn = new Scanner(System.in);
         
         while(true) {
-        System.out.print("이름 > ");
+        System.out.print("이름  > ");
         String name = keyIn.nextLine();
         
         System.out.print("이메일 > ");
