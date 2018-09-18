@@ -11,3 +11,7 @@
 ## java110-project (tag:v0.3)
 
 - 메서드 활용하여 리팩토링
+
+## java110-project (tag:v0.4)
+
+- 클래스 활용

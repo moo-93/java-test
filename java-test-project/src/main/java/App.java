@@ -25,8 +25,33 @@ public class App {
             this.password = password;
         }
     }
+    
+    static class Student extends Member{
+        protected String school;
+        protected boolean working;
+        protected String tel;
+        
+        public String getSchool() {
+            return school;
+        }
+        public void setSchool(String school) {
+            this.school = school;
+        }
+        public boolean isWorking() {
+            return working;
+        }
+        public void setWorking(boolean working) {
+            this.working = working;
+        }
+        public String getTel() {
+            return tel;
+        }
+        public void setTel(String tel) {
+            this.tel = tel;
+        }
+    }
 
-    static Member []members = new Member[100];
+    static Student []students = new Student[100];
     static int index = 0;
 
     static Scanner keyIn = new Scanner(System.in);
@@ -81,26 +106,42 @@ public class App {
         }
     }
     static void printMembers() {
-        for(int i = 0; i < index; i++) {
-            System.out.printf("%s, %s, %s\n", members[i].getName(), members[i].getEmail(), members[i].getPassword());
+        int cnt = 0;
+        for(Student s : students){
+            if(cnt++ == index) break;
+            System.out.printf("%s, %s, %s, %s, %b, %s\n", s.getName()
+                    ,s.getEmail()
+                    ,s.getPassword()
+                    ,s.getSchool()
+                    ,s.isWorking()
+                    ,s.getTel());   
         }
     }
 
     static void inputMember() {
         while(true) {
-            Member m = new Member();
+            Student s = new Student();
 
             System.out.print("이름  > ");
-            m.setName(keyIn.nextLine()); 
+            s.setName(keyIn.nextLine()); 
 
             System.out.print("이메일 > ");
-            m.setEmail(keyIn.nextLine()); 
+            s.setEmail(keyIn.nextLine()); 
 
             System.out.print("암호 > ");
-            m.setPassword(keyIn.nextLine()); 
+            s.setPassword(keyIn.nextLine()); 
+            
+            System.out.print("최종학력 > ");
+            s.setSchool(keyIn.nextLine()); 
+            
+            System.out.print("재직여부(true/false) > ");
+            s.setWorking(Boolean.parseBoolean(keyIn.nextLine())); 
+            
+            System.out.print("전화번호 > ");
+            s.setTel(keyIn.nextLine()); 
 
             System.out.println("continue?(Y/n)");
-            members[index++] = m;
+            students[index++] = s;
 
             String answer = keyIn.nextLine();
             if(answer.toLowerCase().equals("n"))
