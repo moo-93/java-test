@@ -2,18 +2,18 @@ package bitcamp.javatest.cms.util;
 
 import bitcamp.javatest.cms.domain.Student;
 
-public class ArrayList {
+public class ArrayList<T> {
 
-    Object []list = new Object[5];
-    int index = 0;
+    private Object []list = new Object[5];
+    private int index = 0;
 
-    public void add(Object obj) {
+    public void add(T t) {
 
         if(index == list.length) {
             increaseStorage();
         }
 
-        list[index++] = obj;
+        list[index++] = t;
     }
 
     private void increaseStorage() {
@@ -43,11 +43,12 @@ public class ArrayList {
         return index;
     }
 
-    public Object get(int no) {
+    @SuppressWarnings("unchecked")
+    public T get(int no) {
         if(no < 0 || no >= index) {
             return null;
         }
 
-        return list[no];
+        return (T)list[no];
     }
 }
