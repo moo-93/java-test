@@ -1,14 +1,19 @@
 package bitcamp.javatest.cms.control;
 import java.util.Scanner;
 
-import bitcamp.javatest.cms.control.dao.ManagerList;
 import bitcamp.javatest.cms.domain.Manager;
+import bitcamp.javatest.cms.util.ArrayList;
 
 public class ManagerController {
 
-    public static Scanner keyIn;
+    private ArrayList managers = new ArrayList();
+    private Scanner keyIn;
 
-    public static void serviceManagerMenu() {
+    public ManagerController(Scanner keyIn) {
+        this.keyIn = keyIn;
+    }
+    
+    public void serviceManagerMenu() {
         while(true) {
             System.out.println("[list] or [add] "
                     + "or [delete] or [detail] or [quit]");
@@ -31,9 +36,9 @@ public class ManagerController {
         }
     }
 
-    private static void printManagers() {
-        for(int i = 0; i<ManagerList.size(); i++){
-            Manager m = ManagerList.get(i);
+    private void printManagers() {
+        for(int i = 0; i<managers.size(); i++){
+            Manager m = (Manager)managers.get(i);
             System.out.printf("%d %s, %s, %s, %s, %s\n", i
                     ,m.getName()
                     ,m.getEmail()
@@ -43,7 +48,7 @@ public class ManagerController {
         }
     }
 
-    private static void inputManager() {
+    private void inputManager() {
         while(true) {
             Manager m = new Manager();
 
@@ -64,7 +69,7 @@ public class ManagerController {
 
             System.out.println("continue?(Y/n)");
 
-            ManagerList.add(m);
+            managers.add(m);
             
             String answer = keyIn.nextLine();
             if(answer.toLowerCase().equals("n"))
@@ -72,28 +77,28 @@ public class ManagerController {
         }
     }
 
-    private static void deleteManager() {
+    private void deleteManager() {
 
         System.out.print("삭제할 번호 > ");
         int no = Integer.parseInt(keyIn.nextLine());
 
-        if(no < 0 || no >= ManagerList.size()) {
+        if(no < 0 || no >= managers.size()) {
             System.out.println("유효하지 않은 번호입니다.");
             return;
         }
-        ManagerList.remove(no);
+        managers.remove(no);
     }
     
-    private static void detailManager() {
+    private void detailManager() {
         
         System.out.print("조회할 번호 > ");
         int no = Integer.parseInt(keyIn.nextLine());
         
-        if(no < 0 || no >= ManagerList.size()) {
+        if(no < 0 || no >= managers.size()) {
             System.out.println("유효하지 않은 번호입니다.");
             return;
         }
-        Manager m = ManagerList.get(no);
+        Manager m = (Manager)managers.get(no);
         System.out.printf("이름 : %s ", m.getName());
         System.out.printf("이메일 : %s ", m.getEmail());
         System.out.printf("암호 : %s ", m.getPassword());

@@ -1,15 +1,19 @@
 package bitcamp.javatest.cms.control;
 import java.util.Scanner;
 
-import bitcamp.javatest.cms.control.dao.StudentList;
 import bitcamp.javatest.cms.domain.Student;
+import bitcamp.javatest.cms.util.ArrayList;
 
 public class StudentController {
 
+    private ArrayList students = new ArrayList();
+    private Scanner keyIn;
     
-    public static Scanner keyIn;
+    public StudentController(Scanner keyIn) {
+        this.keyIn = keyIn;
+    }
     
-    public static void serviceStudentMenu() {
+    public void serviceStudentMenu() {
         while(true) {
             System.out.println("[list] or [add] or [delete]"
                     + " or [detail] or [quit]");
@@ -32,9 +36,9 @@ public class StudentController {
         }
     }
 
-    private static void printStudents() {
-        for(int i = 0; i< StudentList.size(); i++){
-            Student s = StudentList.get(i);
+    private void printStudents() {
+        for(int i = 0; i< students.size(); i++){
+            Student s = (Student)students.get(i);
             System.out.printf("%d %s, %s, %s, %s, %b, %s\n",i
                     ,s.getName()
                     ,s.getEmail()
@@ -45,7 +49,7 @@ public class StudentController {
         }
     }
 
-    private static void inputStudent() {
+    private void inputStudent() {
         while(true) {
             Student s = new Student();
 
@@ -69,7 +73,7 @@ public class StudentController {
             
             System.out.println("continue?(Y/n)");
             
-            StudentList.add(s);
+            students.add(s);
 
             String answer = keyIn.nextLine();
             if(answer.toLowerCase().equals("n"))
@@ -79,29 +83,29 @@ public class StudentController {
     
     
 
-    private static void deleteStudent() {
+    private void deleteStudent() {
 
         System.out.print("삭제할 번호 > ");
         int no = Integer.parseInt(keyIn.nextLine());
 
-        if(no < 0 || no >= StudentList.size()) {
+        if(no < 0 || no >= students.size()) {
             System.out.println("유효하지 않은 번호입니다.");
             return;
         }
         
-        StudentList.remove(no);
+        students.remove(no);
     }
     
-    private static void detailStudent() {
+    private void detailStudent() {
 
         System.out.print("조회할 번호 > ");
         int no = Integer.parseInt(keyIn.nextLine());
         
-        if(no < 0 || no >= StudentList.size()) {
+        if(no < 0 || no >= students.size()) {
             System.out.println("유효하지 않은 번호입니다.");
             return;
         }
-        Student s = StudentList.get(no);
+        Student s = (Student)students.get(no);
         
         System.out.printf("이름 : %s ", s.getName());
         System.out.printf("이메일 : %s ", s.getEmail());
