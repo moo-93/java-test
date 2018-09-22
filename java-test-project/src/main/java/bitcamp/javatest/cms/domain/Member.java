@@ -1,3 +1,4 @@
+package bitcamp.javatest.cms.domain;
 
 public class Member {
     protected String name;

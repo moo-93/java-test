@@ -1,8 +1,11 @@
+package bitcamp.javatest.cms.control;
 import java.util.Scanner;
+
+import bitcamp.javatest.cms.domain.Member;
 
 public class TeacherController {
 
-    static Scanner keyIn;
+    public static Scanner keyIn;
     static class Teacher extends Member{
         protected int pay;
         protected String subjects;
@@ -24,7 +27,7 @@ public class TeacherController {
     static Teacher []teachers = new Teacher[100];
     static int teacherIndex = 0;
 
-    static void serviceTeacherMenu() {
+    public static void serviceTeacherMenu() {
         while(true) {
             System.out.println("[list] or [add] or [quit]");
             System.out.println("선생 관리 > ");
@@ -42,7 +45,7 @@ public class TeacherController {
         }
     }
 
-    static void printTeachers() {
+    private static void printTeachers() {
         int cnt = 0;
         for(Teacher t : teachers){
             if(cnt++ == teacherIndex) break;
@@ -55,7 +58,7 @@ public class TeacherController {
         }
     }
 
-    static void inputTeacher() {
+    private static void inputTeacher() {
         while(true) {
             Teacher t = new Teacher();
 

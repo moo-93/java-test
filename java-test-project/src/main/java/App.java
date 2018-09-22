@@ -1,5 +1,9 @@
 import java.util.Scanner;
 
+import bitcamp.javatest.cms.control.ManagerController;
+import bitcamp.javatest.cms.control.StudentController;
+import bitcamp.javatest.cms.control.TeacherController;
+
 public class App {
 
     static Scanner keyIn = new Scanner(System.in);
