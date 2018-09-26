@@ -3,6 +3,11 @@ import java.util.Scanner;
 import bitcamp.javatest.cms.control.ManagerController;
 import bitcamp.javatest.cms.control.StudentController;
 import bitcamp.javatest.cms.control.TeacherController;
+import bitcamp.javatest.cms.domain.Manager;
+import bitcamp.javatest.cms.domain.Student;
+import bitcamp.javatest.cms.domain.Teacher;
+import bitcamp.javatest.cms.util.ArrayList;
+import bitcamp.javatest.cms.util.LinkedList;
 
 public class App {
 
@@ -11,10 +16,13 @@ public class App {
 
 
     public static void main(String[] args) {
-
-        StudentController sc = new StudentController(keyIn);
-        TeacherController tc = new TeacherController(keyIn);
-        ManagerController mc = new ManagerController(keyIn);
+        
+        StudentController sc = new StudentController(
+                keyIn, new LinkedList<Student>());
+        TeacherController tc = new TeacherController(
+                keyIn, new ArrayList<Teacher>());
+        ManagerController mc = new ManagerController(
+                keyIn, new ArrayList<Manager>());
         
         while(true) {
             String menu = promptMenu();

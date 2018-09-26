@@ -2,15 +2,16 @@ package bitcamp.javatest.cms.control;
 import java.util.Scanner;
 
 import bitcamp.javatest.cms.domain.Teacher;
-import bitcamp.javatest.cms.util.ArrayList;
+import bitcamp.javatest.cms.util.List;
 
 public class TeacherController {
 
-    private ArrayList<Teacher> teachers = new ArrayList<>();
+    private List<Teacher> teachers;
     private Scanner keyIn;
 
-    public TeacherController(Scanner keyIn) {
+    public TeacherController(Scanner keyIn, List<Teacher> teachers) {
         this.keyIn = keyIn;
+        this.teachers = teachers;
     }
     
     public void serviceTeacherMenu() {

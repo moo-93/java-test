@@ -2,15 +2,16 @@ package bitcamp.javatest.cms.control;
 import java.util.Scanner;
 
 import bitcamp.javatest.cms.domain.Manager;
-import bitcamp.javatest.cms.util.LinkedList;
+import bitcamp.javatest.cms.util.List;
 
 public class ManagerController {
 
-    private LinkedList<Manager> managers = new LinkedList<>();
+    private List<Manager> managers;
     private Scanner keyIn;
 
-    public ManagerController(Scanner keyIn) {
+    public ManagerController(Scanner keyIn, List<Manager> managers) {
         this.keyIn = keyIn;
+        this.managers = managers;
     }
     
     public void serviceManagerMenu() {

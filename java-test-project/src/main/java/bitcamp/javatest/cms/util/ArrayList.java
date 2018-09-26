@@ -1,8 +1,6 @@
 package bitcamp.javatest.cms.util;
 
-import bitcamp.javatest.cms.domain.Student;
-
-public class ArrayList<T> {
+public class ArrayList<T> implements List<T>{
 
     private Object []list = new Object[5];
     private int index = 0;
@@ -18,7 +16,7 @@ public class ArrayList<T> {
 
     private void increaseStorage() {
 
-        Object []newList = new Student[list.length + 3];
+        Object []newList = new Object[list.length + 3];
 
         for(int i = 0; i < list.length; i++) {
             newList[i] = list[i];
@@ -27,9 +25,10 @@ public class ArrayList<T> {
         list = newList;
     }
 
-    public void remove(int no) {
+    @SuppressWarnings("unchecked")
+    public T remove(int no) {
         if(no < 0 || no >= index) {
-            return;
+            return null;
         }
 
         for(int i = no; i < index - 1; i++) {
@@ -37,6 +36,7 @@ public class ArrayList<T> {
         }
 
         index--;
+        return (T)list[no];
     }
 
     public int size() {
