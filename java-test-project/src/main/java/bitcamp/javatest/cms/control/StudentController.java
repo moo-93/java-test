@@ -1,8 +1,8 @@
 package bitcamp.javatest.cms.control;
+import java.util.List;
 import java.util.Scanner;
 
 import bitcamp.javatest.cms.domain.Student;
-import bitcamp.javatest.cms.util.List;
 
 public class StudentController {
 

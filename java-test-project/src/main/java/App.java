@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 import bitcamp.javatest.cms.control.ManagerController;
@@ -6,8 +8,6 @@ import bitcamp.javatest.cms.control.TeacherController;
 import bitcamp.javatest.cms.domain.Manager;
 import bitcamp.javatest.cms.domain.Student;
 import bitcamp.javatest.cms.domain.Teacher;
-import bitcamp.javatest.cms.util.ArrayList;
-import bitcamp.javatest.cms.util.LinkedList;
 
 public class App {
 
