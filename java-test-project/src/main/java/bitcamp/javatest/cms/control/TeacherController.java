@@ -4,17 +4,15 @@ import java.util.Scanner;
 
 import bitcamp.javatest.cms.domain.Teacher;
 
-public class TeacherController {
+public class TeacherController implements Controller{
 
     private List<Teacher> teachers;
-    private Scanner keyIn;
 
-    public TeacherController(Scanner keyIn, List<Teacher> teachers) {
-        this.keyIn = keyIn;
+    public TeacherController(List<Teacher> teachers) {
         this.teachers = teachers;
     }
     
-    public void serviceTeacherMenu() {
+    public void service(Scanner keyIn) {
         while(true) {
             System.out.println("[list] or [add] or [delete]"
                     + " or [detail] or [quit]");
@@ -24,11 +22,11 @@ public class TeacherController {
             if(command.equals("list")) {
                 printTeachers();
             } else if(command.equals("add")) {
-                inputTeacher();
+                inputTeacher(keyIn);
             } else if(command.equals("delete")) {
-                deleteTeacher();  
+                deleteTeacher(keyIn);  
             } else if(command.equals("detail")) {
-                detailTeacher();
+                detailTeacher(keyIn);
             } else if(command.equals("quit")) {
                 return;
             } else {
@@ -50,7 +48,7 @@ public class TeacherController {
         }
     }
 
-    private void inputTeacher() {
+    private void inputTeacher(Scanner keyIn) {
         while(true) {
             Teacher t = new Teacher();
 
@@ -82,7 +80,7 @@ public class TeacherController {
         }
     }
 
-    private void deleteTeacher() {
+    private void deleteTeacher(Scanner keyIn) {
 
         System.out.print("삭제할 번호 > ");
         int no = Integer.parseInt(keyIn.nextLine());
@@ -94,7 +92,7 @@ public class TeacherController {
         teachers.remove(no);
     }
     
-    private void detailTeacher() {
+    private void detailTeacher(Scanner keyIn) {
         
         System.out.print("조회할 번호 > ");
         int no = Integer.parseInt(keyIn.nextLine());
