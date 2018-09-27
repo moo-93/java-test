@@ -1,4 +1,3 @@
-import java.io.IOException;
 import java.util.Scanner;
 
 import bitcamp.javatest.cms.context.ApplicationContext;
@@ -8,9 +7,8 @@ public class App {
 
     static Scanner keyIn = new Scanner(System.in);
 
+    public static void main(String[] args) throws Exception{
 
-    public static void main(String[] args) throws IOException{
-        
         ApplicationContext iocContainer =
                 new ApplicationContext("bitcamp.javatest.cms.control");
         while(true) {
@@ -32,20 +30,13 @@ public class App {
     }
 
     private static String promptMenu() {
+        System.out.println("[메뉴]");
+        System.out.println("1.학생관리 \t 2.강사관리 \t 3.매니저관리 \t 0.종료");
         while(true) {
-            System.out.println("[메뉴]");
-            System.out.println("1.학생관리 \t 2.강사관리 \t 3.매니저관리 \t 0.종료");
-
+            System.out.println("inputMenu > ");
             String menu = keyIn.nextLine();
-            switch(menu) {
-            case "1":
-            case "2":
-            case "3":
-            case "0":
-                return menu;
-            default:
-                System.out.println("유효하지 않은 입력입니다.");
-            }
+            
+            return menu;
         }
     }
 

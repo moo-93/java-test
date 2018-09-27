@@ -1,24 +1,55 @@
 package bitcamp.javatest.cms.context;
 
 import java.io.File;
-import java.io.IOException;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 import java.util.HashMap;
 
 import org.apache.ibatis.io.Resources;
 
 public class ApplicationContext {
     
-    HashMap<String, Object> objpool = new HashMap<>();
+    HashMap<String, Object> objPool = new HashMap<>();
     
-    public ApplicationContext(String pakageName) throws IOException{
+    public ApplicationContext(String pakageName) throws Exception{
         
         String path = pakageName.replace(".", "/");
         
         File file = Resources.getResourceAsFile(path);
-        System.out.println(file.getAbsolutePath());
+        
+        findClass(file, path);
     }
     
     public Object get(String name) {
-        return null;
+        return (Object)objPool.get(name);
     }
+    
+    private void findClass(File filePath, String packagePath) throws Exception{
+        File[] files = filePath.listFiles();
+        for(File file: files) {
+            if(file.isDirectory())
+                findClass(file, packagePath + "/" +file.getName());
+            else {
+                String className = (packagePath + "/" + file.getName())
+                                    .replace("/", ".")
+                                    .replace(".class", "");
+                
+                Class<?> clazz = Class.forName(className);
+                
+                if(clazz.isInterface()) continue;
+                
+                try {
+                    Constructor<?> constructor = clazz.getConstructor();
+                    Object instance = constructor.newInstance();
+                    Field field = clazz.getField("menu");
+                    Object name = field.get(instance);
+                    objPool.put((String)name, instance);
+                    
+                } catch(Exception e) {
+                    System.out.printf("%s 클래스는 기본 생성자가 없습니다.\n", clazz.getName());
+                }
+            }
+        }
+    }
+    
 }

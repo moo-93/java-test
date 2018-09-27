@@ -1,4 +1,5 @@
 package bitcamp.javatest.cms.control;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -6,12 +7,9 @@ import bitcamp.javatest.cms.domain.Manager;
 
 public class ManagerController implements Controller{
 
-    private List<Manager> managers;
+    public String menu = "3";
+    private List<Manager> managers = new ArrayList<>();
 
-    public ManagerController( List<Manager> managers) {
-        this.managers = managers;
-    }
-    
     public void service(Scanner keyIn) {
         while(true) {
             System.out.println("[list] or [add] "
@@ -69,7 +67,7 @@ public class ManagerController implements Controller{
             System.out.println("continue?(Y/n)");
 
             managers.add(m);
-            
+
             String answer = keyIn.nextLine();
             if(answer.toLowerCase().equals("n"))
                 break;
@@ -87,12 +85,12 @@ public class ManagerController implements Controller{
         }
         managers.remove(no);
     }
-    
+
     private void detailManager(Scanner keyIn) {
-        
+
         System.out.print("조회할 번호 > ");
         int no = Integer.parseInt(keyIn.nextLine());
-        
+
         if(no < 0 || no >= managers.size()) {
             System.out.println("유효하지 않은 번호입니다.");
             return;
