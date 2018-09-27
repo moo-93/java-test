@@ -33,7 +33,7 @@ public class App {
         System.out.println("[메뉴]");
         System.out.println("1.학생관리 \t 2.강사관리 \t 3.매니저관리 \t 0.종료");
         while(true) {
-            System.out.println("inputMenu > ");
+            System.out.print("inputMenu > ");
             String menu = keyIn.nextLine();
             
             return menu;

@@ -1,13 +1,15 @@
 package bitcamp.javatest.cms.control;
 import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Scanner;
 
+import bitcamp.javatest.cms.annotation.Component;
 import bitcamp.javatest.cms.domain.Student;
 
+@Component("1")
 public class StudentController implements Controller{
 
-    public String menu = "1";
     private List<Student> students = new ArrayList<>();
     
     public void service(Scanner keyIn) {

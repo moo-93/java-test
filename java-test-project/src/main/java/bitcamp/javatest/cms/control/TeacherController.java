@@ -3,11 +3,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import bitcamp.javatest.cms.annotation.Component;
 import bitcamp.javatest.cms.domain.Teacher;
 
+@Component("2")
 public class TeacherController implements Controller{
 
-    public String menu = "2";
     private List<Teacher> teachers = new ArrayList<>();
     
     public void service(Scanner keyIn) {
