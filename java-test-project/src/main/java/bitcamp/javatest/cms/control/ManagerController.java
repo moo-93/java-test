@@ -4,14 +4,16 @@ import java.util.List;
 import java.util.Scanner;
 
 import bitcamp.javatest.cms.annotation.Component;
+import bitcamp.javatest.cms.annotation.RequestMapping;
 import bitcamp.javatest.cms.domain.Manager;
 
-@Component("3")
-public class ManagerController implements Controller{
+@Component("manager")
+public class ManagerController{
     
     private List<Manager> managers = new ArrayList<>();
 
-    public void service(Scanner keyIn) {
+    @RequestMapping
+    public void manager(Scanner keyIn) {
         while(true) {
             System.out.println("[list] or [add] "
                     + "or [delete] or [detail] or [quit]");

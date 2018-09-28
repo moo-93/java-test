@@ -1,17 +1,18 @@
 package bitcamp.javatest.cms.control;
 import java.util.ArrayList;
-
 import java.util.List;
 import java.util.Scanner;
 
 import bitcamp.javatest.cms.annotation.Component;
+import bitcamp.javatest.cms.annotation.RequestMapping;
 import bitcamp.javatest.cms.domain.Student;
 
-@Component("1")
-public class StudentController implements Controller{
+@Component("student")
+public class StudentController {
 
     private List<Student> students = new ArrayList<>();
     
+    @RequestMapping
     public void service(Scanner keyIn) {
         while(true) {
             System.out.println("[list] or [add] or [delete]"

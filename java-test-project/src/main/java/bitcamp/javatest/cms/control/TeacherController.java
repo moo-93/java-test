@@ -6,12 +6,12 @@ import java.util.Scanner;
 import bitcamp.javatest.cms.annotation.Component;
 import bitcamp.javatest.cms.domain.Teacher;
 
-@Component("2")
-public class TeacherController implements Controller{
+@Component("teacher")
+public class TeacherController {
 
     private List<Teacher> teachers = new ArrayList<>();
     
-    public void service(Scanner keyIn) {
+    public void teacher(Scanner keyIn) {
         while(true) {
             System.out.println("[list] or [add] or [delete]"
                     + " or [detail] or [quit]");

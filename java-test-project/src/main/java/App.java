@@ -1,7 +1,8 @@
+import java.lang.reflect.Method;
 import java.util.Scanner;
 
+import bitcamp.javatest.cms.annotation.RequestMapping;
 import bitcamp.javatest.cms.context.ApplicationContext;
-import bitcamp.javatest.cms.control.Controller;
 
 public class App {
 
@@ -14,30 +15,43 @@ public class App {
         while(true) {
             String menu = promptMenu();
 
-            if (menu.equals("0")) {
+            if (menu.equals("exit")) {
                 System.out.println("Bye!");
                 break;
             }
 
-            Controller controller = (Controller)iocContainer.get(menu);
+            Object controller = iocContainer.getBean(menu);
 
-            if(controller != null) {
-                controller.service(keyIn);
-            } else 
-                System.out.println("해당 메뉴가 존재하지 않습니다."); 
+            if(controller == null) {
+                System.out.println("해당 메뉴가 존재하지 않습니다.");
+                continue;
+            }
+            
+            Method method = findRequestMapping(controller.getClass());
+            if(method == null) {
+                System.out.println("해당 메뉴가 존재하지 않습니다.");
+                continue;
+            }
+            
+            method.invoke(controller, keyIn);
         }
         keyIn.close();
     }
 
-    private static String promptMenu() {
-        System.out.println("[메뉴]");
-        System.out.println("1.학생관리 \t 2.강사관리 \t 3.매니저관리 \t 0.종료");
-        while(true) {
-            System.out.print("inputMenu > ");
-            String menu = keyIn.nextLine();
+    private static Method findRequestMapping(Class<?> clazz) {
+        
+        Method []methods = clazz.getDeclaredMethods();
+        
+        for(Method m : methods) {
+            RequestMapping anno = m.getAnnotation(RequestMapping.class);
             
-            return menu;
+            if(anno != null)
+                return m;
         }
+        return null;
     }
-
+    private static String promptMenu() {
+        System.out.print("menu > ");
+        return keyIn.nextLine();
+    }
 }

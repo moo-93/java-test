@@ -21,7 +21,7 @@ public class ApplicationContext {
         findClass(file, path);
     }
     
-    public Object get(String name) {
+    public Object getBean(String name) {
         return (Object)objPool.get(name);
     }
     
