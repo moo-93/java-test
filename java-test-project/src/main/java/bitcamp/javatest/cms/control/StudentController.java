@@ -7,12 +7,12 @@ import bitcamp.javatest.cms.annotation.Component;
 import bitcamp.javatest.cms.annotation.RequestMapping;
 import bitcamp.javatest.cms.domain.Student;
 
-@Component("student")
+@Component
 public class StudentController {
 
     private List<Student> students = new ArrayList<>();
     
-    @RequestMapping
+    @RequestMapping("student")
     public void service(Scanner keyIn) {
         while(true) {
             System.out.println("[list] or [add] or [delete]"

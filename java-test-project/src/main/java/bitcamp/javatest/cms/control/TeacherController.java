@@ -4,13 +4,15 @@ import java.util.List;
 import java.util.Scanner;
 
 import bitcamp.javatest.cms.annotation.Component;
+import bitcamp.javatest.cms.annotation.RequestMapping;
 import bitcamp.javatest.cms.domain.Teacher;
 
-@Component("teacher")
+@Component
 public class TeacherController {
 
     private List<Teacher> teachers = new ArrayList<>();
     
+    @RequestMapping("teacher")
     public void teacher(Scanner keyIn) {
         while(true) {
             System.out.println("[list] or [add] or [delete]"

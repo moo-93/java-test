@@ -1,8 +1,8 @@
-import java.lang.reflect.Method;
 import java.util.Scanner;
 
-import bitcamp.javatest.cms.annotation.RequestMapping;
 import bitcamp.javatest.cms.context.ApplicationContext;
+import bitcamp.javatest.cms.context.RequestMappingHandlerMapping;
+import bitcamp.javatest.cms.context.RequestMappingHandlerMapping.RequestMappingHandler;
 
 public class App {
 
@@ -12,6 +12,15 @@ public class App {
 
         ApplicationContext iocContainer =
                 new ApplicationContext("bitcamp.javatest.cms.control");
+        
+        RequestMappingHandlerMapping requestHandlerMap =
+                            new RequestMappingHandlerMapping();
+        String []names = iocContainer.getBeanDefinitionNames();
+        for(String name : names) {
+            Object obj = iocContainer.getBean(name);
+            requestHandlerMap.addMapping(obj);
+        }
+        
         while(true) {
             String menu = promptMenu();
 
@@ -20,36 +29,18 @@ public class App {
                 break;
             }
 
-            Object controller = iocContainer.getBean(menu);
+            RequestMappingHandler mapping = requestHandlerMap.getMapping(menu);
 
-            if(controller == null) {
+            if( mapping== null) {
                 System.out.println("해당 메뉴가 존재하지 않습니다.");
                 continue;
             }
             
-            Method method = findRequestMapping(controller.getClass());
-            if(method == null) {
-                System.out.println("해당 메뉴가 존재하지 않습니다.");
-                continue;
-            }
-            
-            method.invoke(controller, keyIn);
+            mapping.getMethod().invoke(mapping.getInstance(), keyIn);
         }
         keyIn.close();
     }
-
-    private static Method findRequestMapping(Class<?> clazz) {
-        
-        Method []methods = clazz.getDeclaredMethods();
-        
-        for(Method m : methods) {
-            RequestMapping anno = m.getAnnotation(RequestMapping.class);
-            
-            if(anno != null)
-                return m;
-        }
-        return null;
-    }
+    
     private static String promptMenu() {
         System.out.print("menu > ");
         return keyIn.nextLine();

@@ -7,12 +7,12 @@ import bitcamp.javatest.cms.annotation.Component;
 import bitcamp.javatest.cms.annotation.RequestMapping;
 import bitcamp.javatest.cms.domain.Manager;
 
-@Component("manager")
+@Component
 public class ManagerController{
     
     private List<Manager> managers = new ArrayList<>();
 
-    @RequestMapping
+    @RequestMapping("manager")
     public void manager(Scanner keyIn) {
         while(true) {
             System.out.println("[list] or [add] "
