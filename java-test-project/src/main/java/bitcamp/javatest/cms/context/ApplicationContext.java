@@ -2,7 +2,6 @@ package bitcamp.javatest.cms.context;
 
 import java.io.File;
 import java.lang.reflect.Constructor;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -11,7 +10,6 @@ import java.util.Set;
 
 import org.apache.ibatis.io.Resources;
 
-import bitcamp.javatest.cms.annotation.Autowired;
 import bitcamp.javatest.cms.annotation.Component;
 
 public class ApplicationContext {
@@ -29,7 +27,10 @@ public class ApplicationContext {
 
         createInstance();
 
-        injectDependency();
+        AutowiredAnnotationBeanPostProcessor processor =
+                new AutowiredAnnotationBeanPostProcessor();
+        
+        processor.postProcess(this);
     }
 
     public String[] getBeanDefinitionNames(){
@@ -92,29 +93,4 @@ public class ApplicationContext {
             }
         }
     }
-    
-    private void injectDependency() {
-        
-        Collection<Object> objList = objPool.values();
-        
-        for(Object obj : objList) {
-            
-            Method[] methods = obj.getClass().getDeclaredMethods();
-            for(Method m : methods) {
-                if(!m.isAnnotationPresent(Autowired.class)) continue;
-                
-                Class<?> paramType = m.getParameterTypes()[0];
-                
-                Object dependency = getBean(paramType);
-                
-                if(dependency == null) continue;
-                
-                try {
-                    m.invoke(obj, dependency);
-                    System.out.printf("%s() 호출됨. \n", m.getName());
-                } catch (Exception e) {}
-            }
-        }
-    }
-
 }
