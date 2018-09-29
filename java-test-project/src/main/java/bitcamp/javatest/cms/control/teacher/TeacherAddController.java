@@ -2,14 +2,20 @@ package bitcamp.javatest.cms.control.teacher;
 
 import java.util.Scanner;
 
-import bitcamp.javatest.cms.App;
+import bitcamp.javatest.cms.annotation.Autowired;
 import bitcamp.javatest.cms.annotation.Component;
 import bitcamp.javatest.cms.annotation.RequestMapping;
+import bitcamp.javatest.cms.dao.TeacherDao;
 import bitcamp.javatest.cms.domain.Teacher;
 
 @Component
 public class TeacherAddController {
-    
+    TeacherDao teacherDao;
+
+    @Autowired
+    public void setTeahcerDao(TeacherDao teacherDao) {
+        this.teacherDao = teacherDao;
+    }
     @RequestMapping("teacher/add")
     public void add(Scanner keyIn) {
         while(true) {
@@ -35,7 +41,7 @@ public class TeacherAddController {
 
             System.out.println("continue?(Y/n)");
             
-            if(App.teacherDao.insert(t) > 0) {
+            if(teacherDao.insert(t) > 0) {
                 System.out.println("저장 완료!");
             } else {
                 System.out.println("입력하신 이메일이 존재합니다.");

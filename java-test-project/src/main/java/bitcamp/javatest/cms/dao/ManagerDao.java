@@ -3,8 +3,10 @@ package bitcamp.javatest.cms.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import bitcamp.javatest.cms.annotation.Component;
 import bitcamp.javatest.cms.domain.Manager;
 
+@Component
 public class ManagerDao {
 
     private List<Manager> list = new ArrayList<>();
