@@ -5,8 +5,10 @@ import java.util.Collection;
 import java.util.Map;
 
 import bitcamp.javatest.cms.annotation.Autowired;
+import bitcamp.javatest.cms.annotation.Component;
 
-public class AutowiredAnnotationBeanPostProcessor {
+@Component
+public class AutowiredAnnotationBeanPostProcessor implements BeanPostProcessor{
 
     Map<String, Object> beanContainer;
 

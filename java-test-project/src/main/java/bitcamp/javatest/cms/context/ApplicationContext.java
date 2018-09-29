@@ -27,10 +27,7 @@ public class ApplicationContext {
 
         createInstance();
 
-        AutowiredAnnotationBeanPostProcessor processor =
-                new AutowiredAnnotationBeanPostProcessor();
-        
-        processor.postProcess(this);
+        callBeanPostProcessor();
     }
 
     public String[] getBeanDefinitionNames(){
@@ -70,20 +67,20 @@ public class ApplicationContext {
             }
         }
     }
-    
+
     private void createInstance() {
         for(Class<?> clazz : classes) {
             if(clazz.isInterface()) continue;
-            
+
             Component anno = clazz.getAnnotation(Component.class);
-            
+
             if(anno == null) continue;
-            
+
             try {
                 Constructor<?> constructor = clazz.getConstructor();
-                
+
                 Object instance = constructor.newInstance();
-                
+
                 if(anno.value().length()>0)
                     objPool.put(anno.value(), instance);
                 else 
@@ -91,6 +88,15 @@ public class ApplicationContext {
             } catch(Exception e) {
                 System.out.printf("%s 클래스는 기본 생성자가 없습니다.\n", clazz.getName());
             }
+        }
+    }
+    private void callBeanPostProcessor() {
+        Collection<Object> objList = objPool.values();
+        
+        for (Object obj : objList) {
+            if(!BeanPostProcessor.class.isInstance(obj)) continue;
+            BeanPostProcessor processor = (BeanPostProcessor)obj;
+            processor.postProcess(this);       
         }
     }
 }
