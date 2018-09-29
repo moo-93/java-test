@@ -1,5 +1,6 @@
 package bitcamp.javatest.cms.control.teacher;
 
+import java.util.List;
 import java.util.Scanner;
 
 import bitcamp.javatest.cms.App;
@@ -12,9 +13,9 @@ public class TeacherListController {
     
     @RequestMapping("teacher/list")
     public void printTeachers(Scanner keyIn) {
-        for(int i = 0; i < App.teachers.size(); i++){
-            Teacher t = App.teachers.get(i);
-            System.out.printf("%d %s, %s, %s, %d, %s, %s\n", i
+        List<Teacher> list = App.teacherDao.findAll();
+        for(Teacher t : list){
+            System.out.printf("%s, %s, %s, %d, %s, %s\n"
                     ,t.getName()
                     ,t.getEmail()
                     ,t.getPassword()

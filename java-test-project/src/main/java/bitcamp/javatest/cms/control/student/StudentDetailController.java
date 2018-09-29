@@ -13,14 +13,15 @@ public class StudentDetailController {
     @RequestMapping("student/detail")
     public void detail(Scanner keyIn) {
 
-        System.out.print("조회할 번호 > ");
-        int no = Integer.parseInt(keyIn.nextLine());
+        System.out.print("조회할 이메일 > ");
+        String email = keyIn.nextLine();
         
-        if(no < 0 || no >= App.students.size()) {
-            System.out.println("유효하지 않은 번호입니다.");
-            return;
+        Student s = App.studentDao.findByEmail(email);
+        
+        if(s == null) {
+            System.out.println("해당 이메일의 학생 정보가 존재하지 않습니다.");
+            return ;
         }
-        Student s = App.students.get(no);
         
         System.out.printf("이름 : %s ", s.getName());
         System.out.printf("이메일 : %s ", s.getEmail());

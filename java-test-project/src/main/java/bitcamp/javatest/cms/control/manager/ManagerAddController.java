@@ -32,7 +32,11 @@ public class ManagerAddController {
 
             System.out.println("continue?(Y/n)");
 
-            App.managers.add(m);
+            if(App.managerDao.insert(m) > 0){
+                System.out.println("저장 완료!");
+            } else {
+                System.out.println("입력하신 이메일의 학생이 존재합니다.");
+            }
 
             String answer = keyIn.nextLine();
             if(answer.toLowerCase().equals("n"))

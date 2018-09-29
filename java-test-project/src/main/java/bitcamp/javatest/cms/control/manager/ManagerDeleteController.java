@@ -12,13 +12,13 @@ public class ManagerDeleteController {
     @RequestMapping("manager/delete")
     public void delete(Scanner keyIn) {
 
-        System.out.print("삭제할 번호 > ");
-        int no = Integer.parseInt(keyIn.nextLine());
+        System.out.print("삭제할 이메일 > ");
+        String email = keyIn.nextLine();
 
-        if(no < 0 || no >= App.managers.size()) {
-            System.out.println("유효하지 않은 번호입니다.");
-            return;
+        if(App.managerDao.delete(email) > 0) {
+            System.out.println("삭제 완료!");
+        } else {
+            System.out.println("해당 이메일의 매니저가 존재하지 않습니다.");
         }
-        App.managers.remove(no);
     }
 }

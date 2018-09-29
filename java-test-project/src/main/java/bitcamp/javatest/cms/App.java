@@ -1,20 +1,19 @@
 package bitcamp.javatest.cms;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 import bitcamp.javatest.cms.context.ApplicationContext;
 import bitcamp.javatest.cms.context.RequestMappingHandlerMapping;
 import bitcamp.javatest.cms.context.RequestMappingHandlerMapping.RequestMappingHandler;
-import bitcamp.javatest.cms.domain.Manager;
-import bitcamp.javatest.cms.domain.Student;
-import bitcamp.javatest.cms.domain.Teacher;
+import bitcamp.javatest.cms.dao.ManagerDao;
+import bitcamp.javatest.cms.dao.StudentDao;
+import bitcamp.javatest.cms.dao.TeacherDao;
 
 public class App {
 
     static Scanner keyIn = new Scanner(System.in);
-    public static ArrayList<Student> students = new ArrayList<>();
-    public static ArrayList<Manager> managers = new ArrayList<>();
-    public static ArrayList<Teacher> teachers = new ArrayList<>();
+    public static StudentDao studentDao = new StudentDao();
+    public static ManagerDao managerDao = new ManagerDao();
+    public static TeacherDao teacherDao = new TeacherDao();
     
     public static void main(String[] args) throws Exception{
 

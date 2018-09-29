@@ -35,7 +35,11 @@ public class TeacherAddController {
 
             System.out.println("continue?(Y/n)");
             
-            App.teachers.add(t);
+            if(App.teacherDao.insert(t) > 0) {
+                System.out.println("저장 완료!");
+            } else {
+                System.out.println("입력하신 이메일이 존재합니다.");
+            }
             
             String answer = keyIn.nextLine();
             if(answer.toLowerCase().equals("n"))
