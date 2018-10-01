@@ -1,8 +1,9 @@
-package bitcamp.javatest.cms.dao;
+package bitcamp.javatest.cms.dao.impl;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import bitcamp.javatest.cms.dao.TeacherDao;
 import bitcamp.javatest.cms.domain.Teacher;
 
 //@Component

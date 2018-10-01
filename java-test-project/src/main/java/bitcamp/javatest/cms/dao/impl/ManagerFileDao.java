@@ -1,4 +1,4 @@
-package bitcamp.javatest.cms.dao;
+package bitcamp.javatest.cms.dao.impl;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bitcamp.javatest.cms.annotation.Component;
+import bitcamp.javatest.cms.dao.ManagerDao;
 import bitcamp.javatest.cms.domain.Manager;
 
 @Component
