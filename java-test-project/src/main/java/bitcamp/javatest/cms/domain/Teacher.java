@@ -1,5 +1,6 @@
 package bitcamp.javatest.cms.domain;
 
+@SuppressWarnings("serial")
 public class Teacher extends Member{
     protected int pay;
     protected String subjects;
