@@ -1,7 +1,9 @@
 package bitcamp.javatest.cms.domain;
 
-@SuppressWarnings("serial")
+
 public class Manager extends Member{
+
+    private static final long serialVersionUID = 1L;
     protected String position;
 
     public String getPosition() {

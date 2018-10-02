@@ -40,12 +40,18 @@ public class ManagerAddController {
 
             System.out.println("continue?(Y/n)");
 
-            if(managerDao.insert(m) > 0){
-                System.out.println("저장 완료!");
+            int rtval = 0;
+            if((rtval = managerDao.insert(m)) > 0) {
+                System.out.println("저장 완료 !");
+            } else if(rtval == -1) {
+                System.out.println("필수 입력란이 비어있습니다.");
+            } else if(rtval == -2) {
+                System.out.println("해당 미에일이 존재합니다.");
             } else {
-                System.out.println("입력하신 이메일의 학생이 존재합니다.");
+                System.out.println("예기치 못한 오류가 발생하였습니다.");
             }
-
+            
+            System.out.print("continue? (Y/n)");
             String answer = keyIn.nextLine();
             if(answer.toLowerCase().equals("n"))
                 break;

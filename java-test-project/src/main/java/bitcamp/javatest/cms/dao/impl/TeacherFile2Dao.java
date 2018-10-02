@@ -22,6 +22,7 @@ public class TeacherFile2Dao implements TeacherDao{
     String filename;
     private List<Teacher> list = new ArrayList<>();
     
+
     @SuppressWarnings("unchecked")
     public TeacherFile2Dao(String filename) {
         this.filename = filename;

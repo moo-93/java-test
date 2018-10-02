@@ -2,10 +2,11 @@ package bitcamp.javatest.cms.domain;
 
 import java.io.Serializable;
 
-@SuppressWarnings("serial")
 public class Member implements Serializable{
+    private static final long serialVersionUID = 1L;
     protected String name;
     protected String email;
+    //protected transient String password;
     protected String password;
     protected String tel;
 
